@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     kotlin("plugin.serialization") version "2.2.0"
+    id("com.google.devtools.ksp")
+    id("com.rickclephas.kmp.nativecoroutines")
 }
 
 kotlin {
@@ -48,6 +50,12 @@ kotlin {
         }
         iosMain.dependencies {
             implementation("io.ktor:ktor-client-darwin:${ktorVersion}")
+        }
+        all {
+            languageSettings {
+                optIn("kotlin.experimental.ExperimentalObjCName")
+                optIn("kotlin.time.ExperimentalTime")
+            }
         }
     }
 }
